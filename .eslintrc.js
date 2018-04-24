@@ -27,7 +27,10 @@ module.exports = {
     'max-params': ['error', 4],
     'no-null/no-null': ['error'],
     'no-unused-expressions': ['off'],
-    'no-unused-vars': ['error', { argsIgnorePattern: '^_$' }],
+    'no-unused-vars': [
+      'error',
+      { argsIgnorePattern: '^_$', varsIgnorePattern: '^React$' },
+    ],
     'prettier/prettier': 'error',
     radix: ['error'],
   },
