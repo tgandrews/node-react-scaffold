@@ -8,28 +8,24 @@
     "lint": "eslint .",
     "pre-commit": "lint-staged",
     "build": "babel src -s inline -d lib",
-    "postinstall": "ln -s ../lib node_modules/$",
-    "start": "node --harmony -r dotenv/config -r source-map-support/register lib/server/index.js",
+    "start":
+      "node --harmony -r dotenv/config -r source-map-support/register lib/server/index.js",
     "start:dev": "nodemon --ignore lib --exec 'yarn build && yarn start'"
   },
   "lint-staged": {
-    "*.js": [
-      "lint",
-      "prettier --write",
-      "git add"
-    ],
-    "*.json": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.js": ["lint", "prettier --write", "git add"],
+    "*.json": ["prettier --write", "git add"]
   },
   "dependencies": {
     "koa": "^2.5.0",
     "koa-bodyparser": "^4.2.0",
     "koa-morgan": "^1.0.1",
     "koa-router": "^7.4.0",
+    "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "winston": "^2.4.2"
   },
   "devDependencies": {

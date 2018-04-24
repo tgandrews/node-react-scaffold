@@ -1,8 +1,8 @@
 Arguments: 
-  /Users/tgandrews/.nvm/versions/node/v8.11.1/bin/node /Users/tgandrews/.nvm/versions/node/v8.11.1/bin/yarn lint
+  /Users/tgandrews/.nvm/versions/node/v8.11.1/bin/node /Users/tgandrews/.nvm/versions/node/v8.11.1/bin/yarn start
 
 PATH: 
-  /Users/tgandrews/google-cloud-sdk/bin:/Users/tgandrews/.rvm/gems/ruby-2.2.3/bin:/Users/tgandrews/.rvm/gems/ruby-2.2.3@global/bin:/Users/tgandrews/.rvm/rubies/ruby-2.2.3/bin:/Users/tgandrews/.rvm/bin:/Users/tgandrews/.gvm/pkgsets/go1.6/global/bin:/Users/tgandrews/.gvm/gos/go1.6/bin:/Users/tgandrews/.gvm/pkgsets/go1.6/global/overlay/bin:/Users/tgandrews/.gvm/bin:/Users/tgandrews/.gvm/bin:/usr/local/bin:/usr/local/sbin:/Users/tgandrews/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/tgandrews/google-cloud-sdk/bin:/Users/tgandrews/.nvm/versions/node/v8.11.1/bin:/usr/local/sbin:/Users/tgandrews/bin:/Users/tgandrews/.cargo/bin:/Users/tgandrews/src/bin:/Users/tgandrews/.cargo/bin:/Users/tgandrews/src/bin:/Users/tgandrews/bin
+  /Users/tgandrews/src/planning-poker/node_modules/.bin:/Users/tgandrews/src/planning-poker/node_modules/.bin:/Users/tgandrews/.config/yarn/link/node_modules/.bin:/Users/tgandrews/src/planning-poker/node_modules/.bin:/Users/tgandrews/.config/yarn/link/node_modules/.bin:/Users/tgandrews/.nvm/versions/node/v8.11.1/libexec/lib/node_modules/npm/bin/node-gyp-bin:/Users/tgandrews/.nvm/versions/node/v8.11.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/tgandrews/.nvm/versions/node/v8.11.1/bin/node_modules/npm/bin/node-gyp-bin:/Users/tgandrews/google-cloud-sdk/bin:/Users/tgandrews/.rvm/gems/ruby-2.2.3/bin:/Users/tgandrews/.rvm/gems/ruby-2.2.3@global/bin:/Users/tgandrews/.rvm/rubies/ruby-2.2.3/bin:/Users/tgandrews/.rvm/bin:/Users/tgandrews/.gvm/pkgsets/go1.6/global/bin:/Users/tgandrews/.gvm/gos/go1.6/bin:/Users/tgandrews/.gvm/pkgsets/go1.6/global/overlay/bin:/Users/tgandrews/.gvm/bin:/Users/tgandrews/.gvm/bin:/usr/local/bin:/usr/local/sbin:/Users/tgandrews/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/tgandrews/google-cloud-sdk/bin:/Users/tgandrews/.nvm/versions/node/v8.11.1/bin:/usr/local/sbin:/Users/tgandrews/bin:/Users/tgandrews/.cargo/bin:/Users/tgandrews/src/bin:/Users/tgandrews/.cargo/bin:/Users/tgandrews/src/bin:/Users/tgandrews/bin
 
 Yarn version: 
   1.5.1
@@ -24,28 +24,24 @@ npm manifest:
       "lint": "eslint .",
       "pre-commit": "lint-staged",
       "build": "babel src -s inline -d lib",
-      "postinstall": "ln -s ../lib node_modules/$",
-      "start": "node --harmony -r dotenv/config -r source-map-support/register lib/server/index.js",
+      "start":
+        "node --harmony -r dotenv/config -r source-map-support/register lib/server/index.js",
       "start:dev": "nodemon --ignore lib --exec 'yarn build && yarn start'"
     },
     "lint-staged": {
-      "*.js": [
-        "lint",
-        "prettier --write",
-        "git add"
-      ],
-      "*.json": [
-        "prettier --write",
-        "git add"
-      ]
+      "*.js": ["lint", "prettier --write", "git add"],
+      "*.json": ["prettier --write", "git add"]
     },
     "dependencies": {
       "koa": "^2.5.0",
       "koa-bodyparser": "^4.2.0",
       "koa-morgan": "^1.0.1",
       "koa-router": "^7.4.0",
+      "prop-types": "^15.6.1",
       "react": "^16.3.2",
       "react-dom": "^16.3.2",
+      "react-router": "^4.2.0",
+      "react-router-dom": "^4.2.2",
       "winston": "^2.4.2"
     },
     "devDependencies": {
@@ -2060,6 +2056,20 @@ Lockfile:
     dependencies:
       function-bind "^1.0.2"
   
+  history@^4.7.2:
+    version "4.7.2"
+    resolved "https://registry.yarnpkg.com/history/-/history-4.7.2.tgz#22b5c7f31633c5b8021c7f4a8a954ac139ee8d5b"
+    dependencies:
+      invariant "^2.2.1"
+      loose-envify "^1.2.0"
+      resolve-pathname "^2.2.0"
+      value-equal "^0.4.0"
+      warning "^3.0.0"
+  
+  hoist-non-react-statics@^2.3.0:
+    version "2.5.0"
+    resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.0.tgz#d2ca2dfc19c5a91c5a6615ce8e564ef0347e2a40"
+  
   hosted-git-info@^2.1.4:
     version "2.6.0"
     resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.6.0.tgz#23235b29ab230c576aab0d4f13fc046b0b038222"
@@ -2167,7 +2177,7 @@ Lockfile:
       strip-ansi "^4.0.0"
       through "^2.3.6"
   
-  invariant@^2.2.0, invariant@^2.2.2:
+  invariant@^2.2.0, invariant@^2.2.1, invariant@^2.2.2:
     version "2.2.4"
     resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
     dependencies:
@@ -2617,7 +2627,7 @@ Lockfile:
     version "4.17.5"
     resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.5.tgz#99a92d65c0272debe8c96b6057bc8fbfa3bed511"
   
-  loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.3.1:
+  loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.2.0, loose-envify@^1.3.1:
     version "1.3.1"
     resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.3.1.tgz#d1a8ad33fa9ce0e713d65fdd0ac8b748d478c848"
     dependencies:
@@ -3083,7 +3093,7 @@ Lockfile:
     version "1.0.5"
     resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.5.tgz#3c1adf871ea9cd6c9431b6ea2bd74a0ff055c4c1"
   
-  path-to-regexp@^1.1.1:
+  path-to-regexp@^1.1.1, path-to-regexp@^1.7.0:
     version "1.7.0"
     resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-1.7.0.tgz#59fde0f435badacba103a84e9d3bc64e96b9937d"
     dependencies:
@@ -3167,7 +3177,7 @@ Lockfile:
     dependencies:
       asap "~2.0.3"
   
-  prop-types@^15.6.0:
+  prop-types@^15.5.4, prop-types@^15.6.0, prop-types@^15.6.1:
     version "15.6.1"
     resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
     dependencies:
@@ -3228,6 +3238,29 @@ Lockfile:
       loose-envify "^1.1.0"
       object-assign "^4.1.1"
       prop-types "^15.6.0"
+  
+  react-router-dom@^4.2.2:
+    version "4.2.2"
+    resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-4.2.2.tgz#c8a81df3adc58bba8a76782e946cbd4eae649b8d"
+    dependencies:
+      history "^4.7.2"
+      invariant "^2.2.2"
+      loose-envify "^1.3.1"
+      prop-types "^15.5.4"
+      react-router "^4.2.0"
+      warning "^3.0.0"
+  
+  react-router@^4.2.0:
+    version "4.2.0"
+    resolved "https://registry.yarnpkg.com/react-router/-/react-router-4.2.0.tgz#61f7b3e3770daeb24062dae3eedef1b054155986"
+    dependencies:
+      history "^4.7.2"
+      hoist-non-react-statics "^2.3.0"
+      invariant "^2.2.2"
+      loose-envify "^1.3.1"
+      path-to-regexp "^1.7.0"
+      prop-types "^15.5.4"
+      warning "^3.0.0"
   
   react@^16.3.2:
     version "16.3.2"
@@ -3363,6 +3396,10 @@ Lockfile:
   resolve-from@^1.0.0:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-1.0.1.tgz#26cbfe935d1aeeeabb29bc3fe5aeb01e93d44226"
+  
+  resolve-pathname@^2.2.0:
+    version "2.2.0"
+    resolved "https://registry.yarnpkg.com/resolve-pathname/-/resolve-pathname-2.2.0.tgz#7e9ae21ed815fd63ab189adeee64dc831eefa879"
   
   resolve-url@^0.2.1:
     version "0.2.1"
@@ -3907,9 +3944,19 @@ Lockfile:
       spdx-correct "^3.0.0"
       spdx-expression-parse "^3.0.0"
   
+  value-equal@^0.4.0:
+    version "0.4.0"
+    resolved "https://registry.yarnpkg.com/value-equal/-/value-equal-0.4.0.tgz#c5bdd2f54ee093c04839d71ce2e4758a6890abc7"
+  
   vary@^1.0.0:
     version "1.1.2"
     resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
+  
+  warning@^3.0.0:
+    version "3.0.0"
+    resolved "https://registry.yarnpkg.com/warning/-/warning-3.0.0.tgz#32e5377cb572de4ab04753bdf8821c01ed605b7c"
+    dependencies:
+      loose-envify "^1.0.0"
   
   whatwg-fetch@>=0.10.0:
     version "2.0.4"
@@ -3982,7 +4029,7 @@ Trace:
   Error: Command failed.
   Exit code: 1
   Command: sh
-  Arguments: -c eslint .
+  Arguments: -c node --harmony -r dotenv/config -r source-map-support/register lib/server/index.js
   Directory: /Users/tgandrews/src/planning-poker
   Output:
   

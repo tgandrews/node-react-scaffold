@@ -1,7 +1,7 @@
 import Koa from 'koa';
 
-import logInit from '$/server/logger';
-import renderer from '$/server/renderer';
+import logInit from './logger';
+import renderer from './renderer';
 
 export default async () => {
   const logger = logInit();
