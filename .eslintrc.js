@@ -11,7 +11,7 @@ module.exports = {
     sandbox: true,
   },
   extends: [
-    'eslint-config-airbnb-base',
+    'airbnb',
     'prettier',
     'plugin:import/errors',
     'plugin:import/warnings',
@@ -27,11 +27,9 @@ module.exports = {
     'max-params': ['error', 4],
     'no-null/no-null': ['error'],
     'no-unused-expressions': ['off'],
-    'no-unused-vars': [
-      'error',
-      { argsIgnorePattern: '^_$', varsIgnorePattern: '^React$' },
-    ],
+    'no-unused-vars': ['error', { argsIgnorePattern: '^_$' }],
     'prettier/prettier': 'error',
-    radix: ['error'],
+    radix: 'error',
+    'react/jsx-filename-extension': 'off',
   },
 };
