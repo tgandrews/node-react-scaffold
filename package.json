@@ -1,0 +1,52 @@
+{
+  "name": "planning-poker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Tom Andrews <git@tomandrews.co.uk>",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint .",
+    "pre-commit": "lint-staged",
+    "build": "babel src -s inline -d lib",
+    "postinstall": "ln -s ../lib node_modules/$",
+    "start": "node --harmony -r dotenv/config -r source-map-support/register lib/server/index.js",
+    "start:dev": "nodemon --ignore lib --exec 'yarn build && yarn start'"
+  },
+  "lint-staged": {
+    "*.js": [
+      "lint",
+      "prettier --write",
+      "git add"
+    ],
+    "*.json": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "koa": "^2.5.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-morgan": "^1.0.1",
+    "koa-router": "^7.4.0",
+    "winston": "^2.4.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.46",
+    "@babel/core": "^7.0.0-beta.46",
+    "@babel/preset-env": "^7.0.0-beta.46",
+    "babel-eslint": "^8.2.3",
+    "concurrently": "^3.5.1",
+    "dotenv": "^5.0.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-chai-friendly": "^0.4.1",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-no-null": "^1.0.2",
+    "eslint-plugin-prettier": "^2.6.0",
+    "husky": "^0.14.3",
+    "nodemon": "^1.17.3",
+    "prettier": "^1.12.1",
+    "source-map-support": "^0.5.4"
+  }
+}
