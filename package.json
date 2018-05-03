@@ -8,13 +8,19 @@
     "lint": "eslint .",
     "pre-commit": "lint-staged",
     "build": "babel src -s inline -d lib",
-    "start":
-      "node --harmony -r dotenv/config -r source-map-support/register lib/server/index.js",
+    "start": "node --harmony -r dotenv/config -r source-map-support/register lib/server/index.js",
     "start:dev": "nodemon --ignore lib --exec 'yarn build && yarn start'"
   },
   "lint-staged": {
-    "*.js": ["lint", "prettier --write", "git add"],
-    "*.json": ["prettier --write", "git add"]
+    "*.js": [
+      "lint",
+      "prettier --write",
+      "git add"
+    ],
+    "*.json": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "dependencies": {
     "koa": "^2.5.0",
