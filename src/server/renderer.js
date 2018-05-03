@@ -16,6 +16,6 @@ export default ctx => {
     </StaticRouter>
   );
   logger.info('Router context', JSON.stringify(routerContext, false, 2));
-  ctx.status = routerContext.status;
+  ctx.status = routerContext.status || 200;
   ctx.body = `<html><body>${result}</body></html>`;
 };
