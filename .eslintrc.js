@@ -5,6 +5,7 @@ module.exports = {
   },
   env: {
     node: true,
+    browser: true,
     jest: true,
   },
   globals: {
@@ -22,7 +23,14 @@ module.exports = {
     'callback-return': ['off'],
     'import/no-extraneous-dependencies': [
       'error',
-      { devDependencies: ['**/*.spec.js', 'test/**.js'] },
+      {
+        devDependencies: [
+          '**/*.spec.js',
+          'test/**.js',
+          'src/config/webpack.config.js',
+          'src/server/router/static/development.js',
+        ],
+      },
     ],
     'max-params': ['error', 4],
     'no-null/no-null': ['error'],

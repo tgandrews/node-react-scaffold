@@ -2,20 +2,22 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router';
 
-import logInit from './logger';
-import App from '../ui/App';
+import { state } from './static';
 
-const logger = logInit();
+import App from '../../ui/App';
 
 export default ctx => {
-  logger.info(`URL: ${ctx.req.url}`);
   const routerContext = {};
   const result = renderToString(
     <StaticRouter location={ctx.req.url} context={routerContext}>
       <App />
     </StaticRouter>
   );
-  logger.info('Router context', JSON.stringify(routerContext, false, 2));
   ctx.status = routerContext.status || 200;
-  ctx.body = `<html><body>${result}</body></html>`;
+  ctx.body = `<html>
+    <body>
+      <div id="content">${result}</div>
+      <script defer src="${state.entry}"></script>
+    </body>
+  </html>`;
 };
