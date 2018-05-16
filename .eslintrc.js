@@ -27,7 +27,7 @@ module.exports = {
         devDependencies: [
           '**/*.spec.js',
           'test/**.js',
-          'src/config/webpack.config.js',
+          'src/config/webpack.config.*.js',
           'src/server/router/static/development.js',
         ],
       },

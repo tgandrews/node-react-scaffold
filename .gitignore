@@ -1,5 +1,6 @@
 node_modules
-webpack.config.compiled.js
+webpack.config.ui.compiled.js
 lib
 .env
 dist
+webpack-stats.json
