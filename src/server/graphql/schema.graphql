@@ -1,0 +1,13 @@
+type Browser {
+  id: ID!
+  name: String!
+  count: Int!
+}
+
+type Query {
+  browsers(top: Int): [Browser]
+}
+
+schema {
+  query: Query
+}

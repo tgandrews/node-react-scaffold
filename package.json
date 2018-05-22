@@ -8,26 +8,32 @@
     "lint": "eslint .",
     "pre-commit": "lint-staged",
     "clean:server": "rm -rf lib",
-    "build:server": "babel src -s inline -d lib",
+    "build:server": "cp -R src lib && babel src -s inline -d lib",
     "clean:ui": "rm -rf dist && rm -f src/config/webpack.config.compiled.js",
-    "build:webpackConfig":
-      "babel src/config/webpack.config.ui.js -o src/config/webpack.config.ui.compiled.js",
-    "build:ui:webpack":
-      "NODE_ENV=production webpack --config src/config/webpack.config.ui.compiled.js --env.production",
-    "build:ui:webpack:json":
-      "NODE_ENV=production webpack --config src/config/webpack.config.ui.compiled.js --env.production --json > webpack-stats.json",
-    "build:ui":
-      "yarn clean:ui && yarn build:webpackConfig && yarn build:ui:webpack:json",
-    "start":
-      "node --harmony -r dotenv/config -r source-map-support/register lib/server/index.js",
-    "start:dev":
-      "nodemon --ignore lib --exec 'yarn clean:server && yarn build:server && yarn start'"
+    "build:webpackConfig": "babel src/config/webpack.config.ui.js -o src/config/webpack.config.ui.compiled.js",
+    "build:ui:webpack": "NODE_ENV=production webpack --config src/config/webpack.config.ui.compiled.js --env.production",
+    "build:ui:webpack:json": "NODE_ENV=production webpack --config src/config/webpack.config.ui.compiled.js --env.production --json > webpack-stats.json",
+    "build:ui": "yarn clean:ui && yarn build:webpackConfig && yarn build:ui:webpack:json",
+    "start": "node --harmony -r dotenv/config -r source-map-support/register lib/server/index.js",
+    "start:dev": "nodemon --ignore lib --exec 'yarn clean:server && yarn build:server && yarn start'"
   },
   "lint-staged": {
-    "*.js": ["lint", "prettier --write", "git add"],
-    "*.json": ["prettier --write", "git add"]
+    "*.js": [
+      "lint",
+      "prettier --write",
+      "git add"
+    ],
+    "*.json": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "dependencies": {
+    "apollo-errors": "^1.9.0",
+    "apollo-resolvers": "^1.3.0",
+    "apollo-server-koa": "^1.3.6",
+    "graphql": "^0.13.2",
+    "graphql-tools": "^3.0.2",
     "koa": "^2.5.0",
     "koa-bodyparser": "^4.2.0",
     "koa-morgan": "^1.0.1",
@@ -62,7 +68,6 @@
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.7.0",
     "husky": "^0.14.3",
-    "memory-fs": "^0.4.1",
     "nodemon": "^1.17.3",
     "prettier": "^1.12.1",
     "source-map-support": "^0.5.4",
