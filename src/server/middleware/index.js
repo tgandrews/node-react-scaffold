@@ -8,16 +8,12 @@ import webpackConfig from '../../config/webpack.config.ui';
 const isDevelopment = process.env.NODE_ENV === 'development';
 
 export default app => {
-  const a = app.use(morgan('dev'));
-  if (isDevelopment) {
-    a.use(
-      koaWebpack({
+  const fileMiddleware = isDevelopment
+    ? koaWebpack({
         dev: { serverSideRender: true },
         config: webpackConfig({ development: true }),
       })
-    );
-  } else {
-    a.use(koaStatic(resolve(__dirname, '..', '..', '..', 'dist')));
-  }
-  return a;
+    : koaStatic(resolve(__dirname, '..', '..', '..', 'dist'));
+
+  return app.use(morgan('dev')).use(fileMiddleware);
 };
