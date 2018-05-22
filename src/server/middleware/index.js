@@ -13,7 +13,7 @@ export default app => {
     a.use(
       koaWebpack({
         dev: { serverSideRender: true },
-        config: webpackConfig({ dev: true }),
+        config: webpackConfig({ development: true }),
       })
     );
   } else {

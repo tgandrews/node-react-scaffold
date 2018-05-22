@@ -12,10 +12,12 @@
     "clean:ui": "rm -rf dist && rm -f src/config/webpack.config.compiled.js",
     "build:webpackConfig":
       "babel src/config/webpack.config.ui.js -o src/config/webpack.config.ui.compiled.js",
-    "build:ui-webpack":
-      "NODE_ENV=production webpack --json --config src/config/webpack.config.ui.compiled.js --env.production > webpack-stats.json",
+    "build:ui:webpack":
+      "NODE_ENV=production webpack --config src/config/webpack.config.ui.compiled.js --env.production",
+    "build:ui:webpack:json":
+      "NODE_ENV=production webpack --config src/config/webpack.config.ui.compiled.js --env.production --json > webpack-stats.json",
     "build:ui":
-      "yarn clean:ui && yarn build:webpackConfig && yarn build:ui-webpack",
+      "yarn clean:ui && yarn build:webpackConfig && yarn build:ui:webpack:json",
     "start":
       "node --harmony -r dotenv/config -r source-map-support/register lib/server/index.js",
     "start:dev":
@@ -35,6 +37,7 @@
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "react-loadable": "^5.4.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "winston": "^2.4.2"
@@ -46,6 +49,7 @@
     "@babel/preset-react": "^7.0.0-beta.46",
     "babel-eslint": "^8.2.3",
     "babel-loader": "^8.0.0-beta.2",
+    "babel-plugin-dynamic-import-node": "^1.2.0",
     "concurrently": "^3.5.1",
     "dotenv": "^5.0.1",
     "eslint": "^4.19.1",

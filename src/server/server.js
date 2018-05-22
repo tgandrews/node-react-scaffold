@@ -1,4 +1,5 @@
 import Koa from 'koa';
+import Loadable from 'react-loadable';
 
 import logInit from './logger';
 import addMiddleware from './middleware';
@@ -8,6 +9,9 @@ export default async () => {
   const logger = logInit();
   const app = await addMiddleware(new Koa());
   const router = await buildRouter();
+  logger.info('Loading components');
+  await Loadable.preloadAll();
+  logger.info('All components loaded');
   app
     .use(router.routes())
     .use(router.allowedMethods())

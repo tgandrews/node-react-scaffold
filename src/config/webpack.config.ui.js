@@ -27,6 +27,17 @@ const moduleRules = [
     loader: 'babel-loader',
     options: {
       cacheDirectory: true,
+      presets: [
+        [
+          '@babel/preset-env',
+          {
+            modules: false,
+            useBuiltIns: 'usage',
+          },
+        ],
+        '@babel/preset-react',
+      ],
+      plugins: ['babel-plugin-dynamic-import-node'],
     },
   },
 ];
