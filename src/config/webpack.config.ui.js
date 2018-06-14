@@ -1,6 +1,9 @@
 import { resolve } from 'path';
 import webpack from 'webpack';
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+import { ReactLoadablePlugin } from '@7rulnik/react-loadable/webpack';
+
+const DIST_PATH = resolve(__dirname, '..', '..', 'dist');
 
 const buildPlugins = env => {
   const plugins = [];
@@ -11,63 +14,71 @@ const buildPlugins = env => {
   // if (env.analyze) {
   //   plugins.push(new BundleAnalyzerPlugin());
   // }
+  if (env.production) {
+    plugins.push(
+      new ReactLoadablePlugin({
+        filename: resolve(DIST_PATH, 'react-loadable.json'),
+      })
+    );
+  }
   return plugins;
-};
-
-const buildEntries = () => {
-  const app = [];
-  app.push(resolve(__dirname, '..', 'browser', 'index.js'));
-  return { app };
 };
 
 const moduleRules = [
   {
     test: /\.js$/,
     exclude: /node_modules/,
-    loader: 'babel-loader',
-    options: {
-      cacheDirectory: true,
-      presets: [
-        [
-          '@babel/preset-env',
-          {
-            modules: false,
-            useBuiltIns: 'usage',
-          },
+    use: {
+      loader: 'babel-loader',
+      options: {
+        babelrc: false,
+        presets: [
+          [
+            '@babel/preset-env',
+            {
+              modules: false,
+              useBuiltIns: 'usage',
+            },
+          ],
+          '@babel/preset-react',
         ],
-        '@babel/preset-react',
-      ],
-      plugins: ['babel-plugin-dynamic-import-node'],
+        plugins: ['@7rulnik/react-loadable/babel'],
+      },
     },
   },
 ];
 
-const buildOptimization = env => {
-  if (env.development) {
-    return undefined;
-  }
-
-  return {
-    splitChunks: {
-      chunks: 'all',
-    },
-  };
-};
-
 export default env => ({
   devtool: env.development ? 'inline-source-map' : undefined,
   mode: env.development ? 'development' : 'production',
-  entry: buildEntries(env),
+  entry: {
+    main: resolve(__dirname, '..', 'browser', 'index.js'),
+  },
   output: {
-    path: resolve(__dirname, '..', '..', 'dist'),
-    filename: 'static/[name].[hash:6].js',
-    chunkFilename: 'static/[id].[chunkhash:6].js',
-    pathinfo: env.development,
-    publicPath: '/',
+    path: DIST_PATH,
+    filename: '[name].[hash:6].js',
+    chunkFilename: '[name].[chunkhash:6].js',
+    publicPath: '/static/',
   },
   module: {
-    rules: moduleRules,
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            babelrc: false,
+            presets: [['es2015', { modules: false }], 'react'],
+            plugins: [
+              'syntax-dynamic-import',
+              'transform-class-properties',
+              'transform-object-assign',
+            ],
+          },
+        },
+      },
+    ],
   },
   plugins: buildPlugins(env),
-  optimization: buildOptimization(env),
 });

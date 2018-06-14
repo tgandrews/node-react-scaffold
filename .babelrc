@@ -10,7 +10,10 @@
     ],
     "@babel/preset-react"
   ],
-  "plugins": ["babel-plugin-dynamic-import-node"],
+  "plugins": [
+    "babel-plugin-dynamic-import-node",
+    "@7rulnik/react-loadable/babel"
+  ],
   "env": {
     "test": {
       "plugins": ["transform-es2015-modules-commonjs"]
