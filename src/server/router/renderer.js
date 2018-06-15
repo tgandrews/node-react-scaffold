@@ -16,7 +16,7 @@ import App from '../../ui/App';
 
 let stats;
 let main;
-if (process.env.USE_BUILT_UI === 'true') {
+if (process.env.NODE_ENV === 'production') {
   const distPath = resolve(__dirname, '..', '..', '..', 'dist');
   stats = JSON.parse(
     readFileSync(resolve(distPath, 'react-loadable.json'), 'utf8')
