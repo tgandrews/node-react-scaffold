@@ -7,7 +7,7 @@ import bodyparser from 'koa-bodyparser';
 
 import webpackConfig from '../../config/webpack.config.ui';
 
-const isDevelopment = process.env.NODE_ENV !== 'development';
+const isDevelopment = process.env.NODE_ENV === 'development';
 
 const fileMiddleware = () => {
   if (isDevelopment) {
