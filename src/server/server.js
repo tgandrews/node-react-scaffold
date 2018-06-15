@@ -1,5 +1,5 @@
 import Koa from 'koa';
-import Loadable from '@7rulnik/react\-loadable';
+import Loadable from '@7rulnik/react-loadable';
 
 import logInit from './logger';
 import addMiddleware from './middleware';

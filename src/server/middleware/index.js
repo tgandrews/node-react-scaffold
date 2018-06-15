@@ -7,15 +7,25 @@ import bodyparser from 'koa-bodyparser';
 
 import webpackConfig from '../../config/webpack.config.ui';
 
-const isDevelopment = process.env.NODE_ENV === 'development';
+const isDevelopment = process.env.NODE_ENV !== 'development';
 
-const fileMiddleware = () =>
-  isDevelopment
-    ? koaWebpack({
-        dev: { serverSideRender: true },
-        config: webpackConfig({ development: true }),
-      })
-    : koaStatic(resolve(__dirname, '..', '..', '..', 'dist'));
+const fileMiddleware = () => {
+  if (isDevelopment) {
+    const objectEntryConfig = webpackConfig({ development: true });
+    const config = {
+      ...objectEntryConfig,
+      entry: {
+        main: [objectEntryConfig.entry.main],
+      },
+    };
+
+    return koaWebpack({
+      dev: { serverSideRender: true },
+      config,
+    });
+  }
+  return koaStatic(resolve(__dirname, '..', '..', '..', 'dist'));
+};
 
 export default app =>
   app

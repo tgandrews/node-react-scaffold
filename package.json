@@ -13,13 +13,13 @@
     "build:webpackConfig":
       "babel src/config/webpack.config.ui.js -o src/config/webpack.config.ui.compiled.js",
     "build:ui:webpack":
-      "NODE_ENV=production webpack --config src/config/webpack.config.ui.compiled.js --env.production",
-    "build:ui:webpack:json":
-      "NODE_ENV=production webpack --config src/config/webpack.config.ui.compiled.js --env.production --json > webpack-stats.json",
+      "webpack --config src/config/webpack.config.ui.compiled.js --env.production",
     "build:ui":
       "yarn clean:ui && yarn build:webpackConfig && yarn build:ui:webpack",
     "start":
       "node --harmony -r dotenv/config -r source-map-support/register lib/server/index.js",
+    "start:debug":
+      "node --inspect-brk --harmony -r dotenv/config -r source-map-support/register lib/server/index.js",
     "start:dev":
       "nodemon --ignore lib --exec 'yarn clean:server && yarn build:server && yarn start'"
   },
@@ -56,17 +56,12 @@
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.46",
     "@babel/core": "^7.0.0-beta.46",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0-beta.51",
     "@babel/preset-env": "^7.0.0-beta.46",
     "@babel/preset-react": "^7.0.0-beta.46",
     "babel-eslint": "^8.2.3",
-    "babel-loader": "^7.1.2",
+    "babel-loader": "^8.0.0-beta",
     "babel-plugin-dynamic-import-node": "^1.2.0",
-    "babel-plugin-module-resolver": "^2.7.1",
-    "babel-plugin-transform-async-to-generator": "^6.24.1",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-assign": "^6.22.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
     "concurrently": "^3.5.1",
     "dotenv": "^5.0.1",
     "eslint": "^4.19.1",

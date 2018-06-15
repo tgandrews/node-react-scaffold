@@ -24,38 +24,14 @@ const buildPlugins = env => {
   return plugins;
 };
 
-const moduleRules = [
-  {
-    test: /\.js$/,
-    exclude: /node_modules/,
-    use: {
-      loader: 'babel-loader',
-      options: {
-        babelrc: false,
-        presets: [
-          [
-            '@babel/preset-env',
-            {
-              modules: false,
-              useBuiltIns: 'usage',
-            },
-          ],
-          '@babel/preset-react',
-        ],
-        plugins: ['@7rulnik/react-loadable/babel'],
-      },
-    },
-  },
-];
-
-export default env => ({
+export default (env = {}) => ({
   devtool: env.development ? 'inline-source-map' : undefined,
   mode: env.development ? 'development' : 'production',
   entry: {
     main: resolve(__dirname, '..', 'browser', 'index.js'),
   },
   output: {
-    path: DIST_PATH,
+    path: resolve(DIST_PATH, 'static'),
     filename: '[name].[hash:6].js',
     chunkFilename: '[name].[chunkhash:6].js',
     publicPath: '/static/',
@@ -69,11 +45,19 @@ export default env => ({
           loader: 'babel-loader',
           options: {
             babelrc: false,
-            presets: [['es2015', { modules: false }], 'react'],
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  modules: false,
+                  useBuiltIns: 'usage',
+                },
+              ],
+              '@babel/preset-react',
+            ],
             plugins: [
-              'syntax-dynamic-import',
-              'transform-class-properties',
-              'transform-object-assign',
+              '@babel/plugin-syntax-dynamic-import',
+              '@7rulnik/react-loadable/babel',
             ],
           },
         },
