@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 import webpack from 'webpack';
-// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { ReactLoadablePlugin } from '@7rulnik/react-loadable/webpack';
 
 const DIST_PATH = resolve(__dirname, '..', '..', 'dist');
@@ -10,9 +10,9 @@ const buildPlugins = env => {
   if (env.development) {
     plugins.push(new webpack.NamedModulesPlugin());
   }
-  // if (env.analyze) {
-  //   plugins.push(new BundleAnalyzerPlugin());
-  // }
+  if (env.analyze) {
+    plugins.push(new BundleAnalyzerPlugin());
+  }
   if (env.production) {
     plugins.push(
       new ReactLoadablePlugin({
