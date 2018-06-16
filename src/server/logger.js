@@ -1,4 +1,4 @@
-import { Logger, transports } from 'winston';
+import { createLogger, transports } from 'winston';
 
 let logger;
 
@@ -7,7 +7,7 @@ export default () => {
     return logger;
   }
 
-  logger = new Logger({
+  logger = createLogger({
     transports: [new transports.Console()],
   });
   return logger;

@@ -11,9 +11,9 @@
     "build:server": "cp -R src lib && babel src -s inline -d lib",
     "clean:ui": "rm -rf dist && rm -f src/config/webpack.config.compiled.js",
     "build:webpackConfig": "babel src/config/webpack.config.ui.js -o src/config/webpack.config.ui.compiled.js",
-    "build:ui:webpack": "webpack --config src/config/webpack.config.ui.compiled.js --env.production",
+    "build:ui:webpack": "NODE_ENV=production webpack --config src/config/webpack.config.ui.compiled.js --env.production",
     "build:ui": "yarn clean:ui && yarn build:webpackConfig && yarn build:ui:webpack",
-    "start": "node --harmony -r dotenv/config -r source-map-support/register lib/server/index.js",
+    "start": "NODE_ENV=production node --harmony -r dotenv/config -r source-map-support/register lib/server/index.js",
     "start:debug": "node --inspect-brk --harmony -r dotenv/config -r source-map-support/register lib/server/index.js",
     "start:dev": "nodemon --ignore lib --exec 'yarn clean:server && yarn build:server && yarn start'"
   },
@@ -45,14 +45,14 @@
     "koa-morgan": "^1.0.1",
     "koa-router": "^7.4.0",
     "koa-static": "^4.0.2",
-    "koa-webpack": "^4.0.0",
+    "koa-webpack": "^5.0.2",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-apollo": "^2.1.4",
     "react-dom": "^16.3.2",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "winston": "^2.4.2"
+    "winston": "^3.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.46",
@@ -79,6 +79,6 @@
     "prettier": "^1.12.1",
     "source-map-support": "^0.5.4",
     "webpack": "^4.0.1",
-    "webpack-cli": "^2.0.9"
+    "webpack-cli": "^3.0.8"
   }
 }
