@@ -10,22 +10,23 @@
     "clean:server": "rm -rf lib",
     "build:server": "cp -R src lib && babel src -s inline -d lib",
     "clean:ui": "rm -rf dist && rm -f src/config/webpack.config.compiled.js",
-    "build:webpackConfig":
-      "babel src/config/webpack.config.ui.js -o src/config/webpack.config.ui.compiled.js",
-    "build:ui:webpack":
-      "NODE_ENV=production webpack --config src/config/webpack.config.ui.compiled.js --env.production",
-    "build:ui":
-      "yarn clean:ui && yarn build:webpackConfig && yarn build:ui:webpack",
-    "start":
-      "NODE_ENV=production node --harmony -r dotenv/config -r source-map-support/register lib/server/index.js",
-    "start:debug":
-      "node --inspect-brk --harmony -r dotenv/config -r source-map-support/register lib/server/index.js",
-    "start:dev":
-      "nodemon --ignore lib --exec 'yarn clean:server && yarn build:server && yarn start'"
+    "build:webpackConfig": "babel src/config/webpack.config.ui.js -o src/config/webpack.config.ui.compiled.js",
+    "build:ui:webpack": "NODE_ENV=production webpack --config src/config/webpack.config.ui.compiled.js --env.production",
+    "build:ui": "yarn clean:ui && yarn build:webpackConfig && yarn build:ui:webpack",
+    "start": "NODE_ENV=production node --harmony -r dotenv/config -r source-map-support/register lib/server/index.js",
+    "start:debug": "node --inspect-brk --harmony -r dotenv/config -r source-map-support/register lib/server/index.js",
+    "start:dev": "nodemon --ignore lib --exec 'yarn clean:server && yarn build:server && yarn start'"
   },
   "lint-staged": {
-    "*.js": ["lint", "prettier --write", "git add"],
-    "*.json": ["prettier --write", "git add"]
+    "*.js": [
+      "lint",
+      "prettier --write",
+      "git add"
+    ],
+    "*.json": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "dependencies": {
     "@7rulnik/react-loadable": "^5.3.4",
@@ -51,7 +52,7 @@
     "react-dom": "^16.3.2",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "winston": "^2.4.2"
+    "winston": "^3.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.46",
