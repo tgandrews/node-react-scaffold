@@ -9,7 +9,7 @@ import webpackConfig from '../../config/webpack.config.ui';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
-const fileMiddleware = () => {
+const fileMiddleware = async () => {
   if (isDevelopment) {
     const objectEntryConfig = webpackConfig({ development: true });
     const config = {
@@ -20,15 +20,15 @@ const fileMiddleware = () => {
     };
 
     return koaWebpack({
-      dev: { serverSideRender: true },
+      devMiddleware: { serverSideRender: true },
       config,
     });
   }
   return koaStatic(resolve(__dirname, '..', '..', '..', 'dist'));
 };
 
-export default app =>
+export default async app =>
   app
     .use(morgan('dev'))
     .use(bodyparser())
-    .use(fileMiddleware());
+    .use(await fileMiddleware());

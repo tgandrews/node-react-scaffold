@@ -9,7 +9,6 @@ const buildPlugins = env => {
   const plugins = [];
   if (env.development) {
     plugins.push(new webpack.NamedModulesPlugin());
-    plugins.push(new webpack.HotModuleReplacementPlugin());
   }
   // if (env.analyze) {
   //   plugins.push(new BundleAnalyzerPlugin());
